@@ -1,0 +1,22 @@
+{
+  "name": "for-the-love-of-k-pop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "grace_ko_d'alessandro",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2",
+    "jquery": "^3.2.1",
+    "mongoose": "^4.13.1",
+    "react": "^16.1.0",
+    "react-dom": "^16.1.0",
+    "request": "^2.83.0"
+  },
+  "devDependencies": {
+    "webpack": "^3.8.1"
+  }
+}
