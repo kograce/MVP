@@ -4,7 +4,7 @@ class Search extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			artistName:''
+			artistName: ''
 		}
 	}
 
@@ -12,7 +12,7 @@ class Search extends React.Component {
 		this.setState({artistName: e.target.value});
 	}
 
-	search() {
+	search(artistName) {
 		this.props.onSearch(this.state.artistName);
 	}
 

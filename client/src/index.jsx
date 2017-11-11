@@ -8,10 +8,34 @@ class App extends React.Component {
 		super(props);
 	}
 
-	search(artistName) {
-		console.log(`${artistName} was searched`);
+	loadPage() {
+		$.ajax({
+			type: 'GET',
+			url: '/chart',
+			data: 'json',
+			success: function(data) {
+				console.log('successful get', data);
+			}
+		})
 	}
 
+	search(artistName) {
+		$.ajax({
+			type: 'POST',
+			url: '/chart',
+			data: artistName,
+			success: function(data) {
+				console.log(data);
+			},
+			error: function(err, data) {
+				console.log('did not post correctly');
+			}
+		})
+	}
+
+	componentDidMount() {
+		this.loadPage();
+	}
 
 	render() {
 		return( <div>
