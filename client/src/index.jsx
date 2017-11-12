@@ -1,46 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import Search from './components/Search.jsx';
+import DatePicker from './components/DatePicker.jsx';
 
 class App extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = this.props;
 	}
 
-	loadPage() {
-		$.ajax({
-			type: 'GET',
-			url: '/chart',
-			data: 'json',
-			success: function(data) {
-				console.log('successful get', data);
-			}
-		})
-	}
-
-	search(artistName) {
+	getDate() {
 		$.ajax({
 			type: 'POST',
-			url: '/chart',
-			data: artistName,
-			success: function(data) {
-				console.log(data);
-			},
-			error: function(err, data) {
-				console.log('did not post correctly');
-			}
-		})
-	}
-
-	componentDidMount() {
-		this.loadPage();
+			url: '/chart'
+		});
+		console.log(this.state, 'this.state in getreq indexjsx');
+		console.log(this.props, 'this.props in getreq indexjsx');
 	}
 
 	render() {
 		return( <div>
 			<h1>For the Love of K-Pop</h1>
-			<Search onSearch={this.search.bind(this)} />
+			<DatePicker onSubmit={this.getDate.bind(this)}></DatePicker>
 			</div>
 		)
 	}

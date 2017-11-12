@@ -1,33 +1,17 @@
 const mongoose = require('mongoose');
+const db = mongoose.connection;
 
-let songSchema = mongoose.Schema({
-	date : Date,
+let chartSchema = mongoose.Schema({
 	artist: String,
-	songName: String,
-	issueDate: Date,
-	currentRank: Number
 });
 
-let Song = mongoose.model('Song', songSchema);
-let saveToDB = (songList) => {
-		song = new Song({
-			date: songList.date,
-			artist: songList.artist,
-			songName: songList.songName,
-			issueDate: songList.issueDate,
-			currentRank: songList.currentRank
-		});
+let Chart = mongoose.model('Chart', chartSchema);
 
-		song.saveToDB = (err) => {
-			if (err) {
-				console.log('hello. err err');
-			} else {
-				console.log('saved successfully');
-			}
-		}
+let saveToDB = (date) => {
+
 	};
 
 
 
-module.exports.Song = Song;
+// module.exports.Song = Song;
 module.exports.saveToDB = saveToDB;

@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 let app = express();
 
 app.use(express.static(__dirname + '/../dist'));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(function(req, res, next) {
@@ -17,17 +18,18 @@ app.use(function(req, res, next) {
 
 
 app.post('/chart', function(req,res) {
-	melon.getSongs(req.body.artistName, function(song) {
-		db.saveToDB(song.date, song.artist, song.songName, song.issueDate, song.currentRank)
-	});
-	res.sendStatus(201);
-  res.end();
-});
+	// NOTWORKINGBCGETSONGSISNTWORKINGDAMMIT
+	console.log('in server post /chart', req.body.data);
+})
 
 
 app.get('/chart', function(res, req) {
-	db.Song.find()
-		.limit(50);
+	// console.log('in server get in /chart');
+	// melon.getSongs(artistName, function(){
+	// 	console.log('is this working?');
+	// })
+	// db.Song.find()
+	// 	.limit(50);
 });
 
 
