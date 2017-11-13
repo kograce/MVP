@@ -44,8 +44,6 @@ app.post('/chart', function(req,res) {
 	});
 });
 
-
-
 app.get('/chart', function(req,res) {
 	var month = new Date().getMonth();
 	var day = new Date().getDate();
@@ -56,8 +54,7 @@ app.get('/chart', function(req,res) {
 
 	melon(fullDate, {cutLine: 20}).weekly().then(chartData => {
 		res.send(chartData);
-		res.end();
-	});
+	})
 });
 
 

@@ -10,7 +10,8 @@ class App extends React.Component {
 		this.state = {
 			month: '',
 			day: '',
-			year: ''
+			year: '',
+			chart: {}
 		}
 	}
 
@@ -43,21 +44,29 @@ class App extends React.Component {
 		});
 	};
 
-	componentDidMount() {
+	getChart() {
+		console.log('in getchart');
+		var scope = this;
 		$.ajax({
 			type: 'GET',
 			url:'/chart',
-			success: function(data) {
-				$("body").append(data);
+			json: true,
+			success: function(chart) {
+				scope.setState({chart: chart.data});
 			}
-		});
+		})
+	}
+
+	componentDidMount() {
+		console.log('in componentDidMount');
+		this.getChart();
 	}
 
 	render() {
 		return( <div>
 			<h1>For the Love of K-Pop</h1>
 			<DatePicker submitDate={this.submitDate.bind(this)} handleMonth={this.handleMonth.bind(this)} handleDay={this.handleDay.bind(this)} handleYear={this.handleYear.bind(this)}></DatePicker>
-			<Chart onMount={this.componentDidMount}></Chart>
+			<Chart chart={this.state.chart}></Chart>
 			</div>
 		)
 	}

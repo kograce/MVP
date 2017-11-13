@@ -1,15 +1,28 @@
 import React from 'react';
+// import ChartEntry from './ChartEntry.jsx';
 
-class Chart extends React.Component {
-	constructor(props) {
-		super(props);
-	}
+var Entry = (props) => (
+	<div>
+		<p>{props.rank}. {props.title}</p>
+		<p>Artist: {props.artist}</p>
+		<p>Album: {props.album}</p>
+	</div>
 
-	render() {
-		return(
-			<p></p>
-	)}
-}
+)
 
 
-export default Chart = Chart;
+const Chart = (props) => (
+	<div>
+		{Object.entries(props.chart).map(song => (
+			<Entry
+				rank={song[1].rank}
+				title={song[1].title}
+				artist={song[1].artist}
+				album={song[1].album}
+			/>
+		))}
+		<br/ >
+	</div>
+)
+
+export default Chart;
