@@ -1,12 +1,12 @@
 const express = require('express');
-const melon = require('../helpers/melon.js');
+const melon = require('melon-chart-api');
 const db = require('../database/index.js');
 const bodyParser = require('body-parser');
 
 let app = express();
 
 app.use(express.static(__dirname + '/../dist'));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(function(req, res, next) {
@@ -18,18 +18,46 @@ app.use(function(req, res, next) {
 
 
 app.post('/chart', function(req,res) {
-	// NOTWORKINGBCGETSONGSISNTWORKINGDAMMIT
-	console.log('in server post /chart', req.body.data);
-})
+	var monthObj = {
+		'January': 1,
+		'February': 2,
+		'March': 3,
+		'April': 4,
+		'May': 5,
+		'June': 6,
+		'July': 7,
+		'August': 8,
+		'September': 9,
+		'October': 10,
+		'November': 11,
+		'December': 12
+	};
+	var monthSelection = monthObj[req.body.month];
+	var month = monthSelection < 10 ? '0'+monthSelection : monthSelection;
+	var day = req.body.day < 10 ? '0'+ req.body.day : req.body.day;
+	var year = req.body.year;
+	var fullDate = "'" + month + '/' + day + '/' + year + "'";
+	console.log(req.body.day, fullDate);
+
+	melon(fullDate, {cutLine: 20}).weekly().then(chartData => {
+		db.saveToDB(chartData, null);
+	});
+});
 
 
-app.get('/chart', function(res, req) {
-	// console.log('in server get in /chart');
-	// melon.getSongs(artistName, function(){
-	// 	console.log('is this working?');
-	// })
-	// db.Song.find()
-	// 	.limit(50);
+
+app.get('/chart', function(req,res) {
+	var month = new Date().getMonth();
+	var day = new Date().getDate();
+	var year = new Date().getFullYear();
+	var monthTwoDigits = month < 10 ? '0'+month : month;
+	var dayTwoDigits = day < 10 ? '0'+day : day;
+	var fullDate = "'" + monthTwoDigits + '/' + dayTwoDigits + '/' + year + "'";
+
+	melon(fullDate, {cutLine: 20}).weekly().then(chartData => {
+		res.send(chartData);
+		res.end();
+	});
 });
 
 

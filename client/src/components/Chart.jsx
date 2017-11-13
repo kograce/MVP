@@ -1,14 +1,15 @@
 import React from 'react';
 
-const Chart = (songs) => (
-	<div>
-		<h3>SONGSONGSONGS</h3>
-		{songs.map(song => ()
-		<Songs
+class Chart extends React.Component {
+	constructor(props) {
+		super(props);
+	}
 
-		/>
-		)}
-	</div>
-	)
+	render() {
+		return(
+			<p></p>
+	)}
+}
 
-export default Chart;
+
+export default Chart = Chart;
