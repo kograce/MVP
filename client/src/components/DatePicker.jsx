@@ -18,7 +18,7 @@ class DatePicker extends React.Component {
 			years.push(<option type='text' name={i}>{i}</option>)
 		}
 		return(<div>
-			<h2>Pick a date to see daily K-Pop chart for that day!</h2>
+			<h2>Pick a date to see that week's Top 20 K-Pop songs!</h2>
 				<form onSubmit={this.props.submitDate}>
 					<label>Month: </label>
 						<select type='text' name='month' onChange={this.props.handleMonth} >

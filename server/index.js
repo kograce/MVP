@@ -1,6 +1,5 @@
 const express = require('express');
 const melon = require('melon-chart-api');
-const db = require('../database/index.js');
 const bodyParser = require('body-parser');
 
 let app = express();
@@ -37,10 +36,9 @@ app.post('/chart', function(req,res) {
 	var day = req.body.day < 10 ? '0'+ req.body.day : req.body.day;
 	var year = req.body.year;
 	var fullDate = "'" + month + '/' + day + '/' + year + "'";
-	console.log(req.body.day, fullDate);
 
 	melon(fullDate, {cutLine: 20}).weekly().then(chartData => {
-		db.saveToDB(chartData, null);
+		res.send(chartData);
 	});
 });
 

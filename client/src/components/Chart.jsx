@@ -21,7 +21,7 @@ const Chart = (props) => (
 				album={song[1].album}
 			/>
 		))}
-		<br/ >
+		<br></br>
 	</div>
 )
 

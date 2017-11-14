@@ -35,11 +35,11 @@ class App extends React.Component {
 
 	submitDate(e) {
 		e.preventDefault();
+		var scope = this;
 		$.ajax({
 			type: 'POST',
 			url: '/chart',
-			data: JSON.stringify(this.state),
-			dataType: 'text',
+			data: scope.state,
 			contentType: "application/json"
 		});
 	};
